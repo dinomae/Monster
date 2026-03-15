@@ -1,4 +1,4 @@
-# Monster Energy Experience ⚡🟢
+# Monster Energy Experience 
 
 **Live Demo: [monster.dinomae.in](https://monster.dinomae.in/)**
 
@@ -6,7 +6,7 @@ This is a passion project I built to experiment with immersive web experiences. 
 
 ---
 
-## 🚀 The Vibe  
+##  The Vibe  
 
 I wanted the site to feel "alive," so I used **GSAP ScrollTrigger** to handle the flow. As you scroll, the product stays central, morphing and reacting to your position. Everything on the site—from the custom cursor tracking your every move to the glowing liquid-crystal buttons—is meant to keep the user engaged.
 
@@ -28,7 +28,7 @@ I kept this project "old school" but with modern logic. No heavy frameworks or c
 
 ---
 
-## 📂 Structure 
+##  Structure 
 
 ```text
 organized_code/
@@ -38,13 +38,5 @@ organized_code/
 └── js/modules/         # The logic behind the magic
 ```
 
----
-
-## ⚡ Running it locally  
-
-If you want to play around with the code:
-1. Clone the repo.
-2. Open `index.html`.
-3. (Optional) Use **Live Server** in VS Code for the best experience with the local assets.
 
 **Unleash the Beast.** 🔥
