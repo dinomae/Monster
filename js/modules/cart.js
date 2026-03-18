@@ -1,15 +1,15 @@
 // -- cart system --
 let cart = [];
 const cartDrawerBackdrop = document.getElementById('cart-drawer-backdrop');
-const cartCloseBtn       = document.getElementById('cart-close');
-const cartNavBtn         = document.getElementById('nav-cta-cart');
-const cartBadge          = document.getElementById('cart-badge');
+const cartCloseBtn = document.getElementById('cart-close');
+const cartNavBtn = document.getElementById('nav-cta-cart');
+const cartBadge = document.getElementById('cart-badge');
 const cartItemsContainer = document.getElementById('cart-items-container');
-const cartSubtotalEl     = document.getElementById('cart-subtotal');
-const cartEmptyMsg       = document.getElementById('cart-empty-msg');
-const checkoutBtn        = document.querySelector('.checkout-btn');
+const cartSubtotalEl = document.getElementById('cart-subtotal');
+const cartEmptyMsg = document.getElementById('cart-empty-msg');
+const checkoutBtn = document.querySelector('.checkout-btn');
 
-function openCart()  { cartDrawerBackdrop.classList.add('open'); document.body.style.overflow = 'hidden'; bindCursorHovers(); }
+function openCart() { cartDrawerBackdrop.classList.add('open'); document.body.style.overflow = 'hidden'; bindCursorHovers(); }
 function closeCart() { cartDrawerBackdrop.classList.remove('open'); document.body.style.overflow = ''; }
 
 function updateCartBadge() {
@@ -26,7 +26,7 @@ function updateCartUI() {
 
     if (cart.length === 0) {
         cartItemsContainer.appendChild(cartEmptyMsg);
-        cartSubtotalEl.textContent = '$0.00';
+        cartSubtotalEl.textContent = '₹0.00';
         updateCartBadge();
         return;
     }
@@ -37,21 +37,21 @@ function updateCartUI() {
         const itemEl = document.createElement('div');
         itemEl.className = 'cart-item';
         // map flavour name → image file
-        const imgBase = item.name.toLowerCase().includes('green')  ? 'green'  :
-                        item.name.toLowerCase().includes('blue')   ? 'cyan'   :
-                        item.name.toLowerCase().includes('violet') ? 'purple' : 'red';
+        const imgBase = item.name.toLowerCase().includes('green') ? 'green' :
+            item.name.toLowerCase().includes('blue') ? 'cyan' :
+                item.name.toLowerCase().includes('violet') ? 'purple' : 'red';
         itemEl.innerHTML = `
             <img src="assets/images/${imgBase}.png" alt="${item.name}" class="cart-item-img">
             <div class="cart-item-info">
                 <span class="cart-item-name">${item.name}</span>
-                <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+                <span class="cart-item-price">₹${item.price.toFixed(2)}</span>
                 <span class="cart-item-remove" data-index="${index}">Remove</span>
             </div>
         `;
         cartItemsContainer.appendChild(itemEl);
     });
 
-    cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    cartSubtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
     updateCartBadge();
 
     // rebind remove buttons after re-render
@@ -77,8 +77,8 @@ function addToCart(name, price) {
 }
 
 // open/close listeners
-if (cartNavBtn)         cartNavBtn.addEventListener('click', openCart);
-if (cartCloseBtn)       cartCloseBtn.addEventListener('click', closeCart);
+if (cartNavBtn) cartNavBtn.addEventListener('click', openCart);
+if (cartCloseBtn) cartCloseBtn.addEventListener('click', closeCart);
 if (cartDrawerBackdrop) {
     cartDrawerBackdrop.addEventListener('click', (e) => { if (e.target === cartDrawerBackdrop) closeCart(); });
 }
@@ -95,7 +95,7 @@ if (checkoutBtn) {
             showConfirm(
                 '🛒',
                 'Order Placed!',
-                `Your Monster Energy order ($${total}) has been confirmed. Prepare to unleash the beast! 🔥`
+                `Your Monster Energy order (₹${total}) has been confirmed. Prepare to unleash the beast! 🔥`
             );
         }, 400);
     });
@@ -104,20 +104,20 @@ if (checkoutBtn) {
 // -- add to cart buttons in flavours section --
 document.querySelectorAll('.fl-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const name  = btn.dataset.name;
+        const name = btn.dataset.name;
         const price = btn.dataset.price;
         if (name && price) {
             addToCart(name, price);
             // quick visual feedback on the button
             const orig = btn.textContent;
-            btn.textContent       = '✔ ADDED!';
-            btn.style.background  = 'var(--accent)';
-            btn.style.color       = '#000';
+            btn.textContent = '✔ ADDED!';
+            btn.style.background = 'var(--accent)';
+            btn.style.color = '#000';
             btn.style.borderColor = 'var(--accent)';
             setTimeout(() => {
-                btn.textContent       = orig;
-                btn.style.background  = '';
-                btn.style.color       = '';
+                btn.textContent = orig;
+                btn.style.background = '';
+                btn.style.color = '';
                 btn.style.borderColor = '';
             }, 1500);
         }

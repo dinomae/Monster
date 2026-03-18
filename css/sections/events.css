@@ -43,7 +43,7 @@
 
 .ev-sub {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     max-width: 500px;
     line-height: 1.7;
 }
@@ -58,12 +58,13 @@
 /* ── Navigation Arrows ───────────────────────────────────── */
 .ev-nav-btn {
     position: absolute;
-    top: calc(50% - 2rem); /* Account for bottom padding */
+    top: calc(50% - 2rem);
+    /* Account for bottom padding */
     transform: translateY(-50%);
     width: 60px;
     height: 60px;
-    background: rgba(10,10,12,0.85);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(10, 10, 12, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: #fff;
     font-size: 1.2rem;
@@ -83,19 +84,26 @@
     transform: translateY(-50%) scale(1.1);
 }
 
-.ev-prev { left: 1.5rem; }
-.ev-next { right: 1.5rem; }
+.ev-prev {
+    left: 1.5rem;
+}
+
+.ev-next {
+    right: 1.5rem;
+}
 
 /* ── Layout ──────────────────────────────────────────────── */
 .ev-layout {
     display: flex;
     flex-wrap: nowrap;
     gap: 1.5rem;
-    padding: 2rem 4rem 4rem 4rem; /* Additional bottom padding for hover shadows */
+    padding: 2rem 4rem 4rem 4rem;
+    /* Additional bottom padding for hover shadows */
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: 4rem;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
@@ -104,11 +112,13 @@
 .ev-layout::-webkit-scrollbar {
     height: 8px;
 }
+
 .ev-layout::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.04);
     border-radius: 10px;
     margin: 0 4rem;
 }
+
 .ev-layout::-webkit-scrollbar-thumb {
     background: var(--accent);
     border-radius: 10px;
@@ -118,23 +128,26 @@
 .ev-card {
     flex-shrink: 0;
     scroll-snap-align: start;
-    width: min(550px, 85vw); /* Uniform width for all cards */
-    height: 560px; /* Uniform height */
+    width: min(550px, 85vw);
+    /* Uniform width for all cards */
+    height: 560px;
+    /* Uniform height */
     position: relative;
-    border-radius: 24px; /* Slightly more rounded for premium feel */
+    border-radius: 24px;
+    /* Slightly more rounded for premium feel */
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     background: #0a0a0b;
     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-                border-color 0.3s ease,
-                box-shadow 0.5s ease;
+        border-color 0.3s ease,
+        box-shadow 0.5s ease;
 }
 
 .ev-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 20px rgba(230,194,0,0.1);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 20px rgba(230, 194, 0, 0.1);
 }
 
 .ev-card-img {
@@ -159,13 +172,12 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 2rem; /* Increased padding */
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.95) 0%,
-        rgba(0,0,0,0.4)  40%,
-        transparent      100%
-    );
+    padding: 2rem;
+    /* Increased padding */
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.4) 40%,
+            transparent 100%);
     transition: background 0.4s ease;
 }
 
@@ -193,7 +205,7 @@
 
 .ev-card-date {
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     letter-spacing: 0.02em;
     display: block;
     margin-bottom: 0.8rem;
@@ -249,12 +261,12 @@
     width: min(860px, 92vw);
     max-height: 90vh;
     background: rgba(12, 12, 14, 0.85);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 28px;
     overflow: hidden;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
     transform: translateY(30px) scale(0.97);
     transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
     backdrop-filter: blur(12px) saturate(160%);
@@ -270,20 +282,23 @@
     top: 1.2rem;
     right: 1.2rem;
     z-index: 10;
-    width: 36px; height: 36px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s ease;
     backdrop-filter: blur(8px);
 }
 
 .ev-modal-close:hover {
-    background: rgba(255,255,255,0.18);
+    background: rgba(255, 255, 255, 0.18);
     color: #fff;
 }
 
@@ -304,7 +319,7 @@
 .ev-modal-img-glow {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(127,193,43,0.2) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(127, 193, 43, 0.2) 0%, transparent 60%);
     transition: background 0.5s ease;
 }
 
@@ -335,14 +350,14 @@
 
 .ev-modal-date {
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     letter-spacing: 1px;
 }
 
 .ev-modal-desc {
     font-size: 0.9rem;
     line-height: 1.85;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .ev-modal-btn {
@@ -412,7 +427,8 @@
 .nw-layout {
     display: flex;
     flex-direction: row;
-    align-items: flex-start; /* Both children start at same Y */
+    align-items: flex-start;
+    /* Both children start at same Y */
     gap: 1.5rem;
     padding: 0 4rem;
     max-width: 1440px;
@@ -425,17 +441,17 @@
     border-radius: 24px;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     background: #0a0a0b;
     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-                border-color 0.3s ease,
-                box-shadow 0.5s ease;
+        border-color 0.3s ease,
+        box-shadow 0.5s ease;
 }
 
 .nw-card:hover {
     transform: translateY(-6px);
     border-color: var(--accent);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 20px rgba(127, 193, 43, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(127, 193, 43, 0.1);
 }
 
 .nw-card-img {
@@ -454,15 +470,18 @@
 /* Featured card: takes up 65% of the layout width */
 .nw-card--featured {
     flex: 6.5;
-    height: 528px; /* 3 × 160px + 2 × 24px gap = 528px */
+    height: 528px;
+    /* 3 × 160px + 2 × 24px gap = 528px */
 }
 
 /* Side rail: takes up 35% of the layout width, same height */
 .nw-side-rail {
     flex: 3.5;
-    height: 528px; /* Exactly matches featured card */
+    height: 528px;
+    /* Exactly matches featured card */
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr; /* 3 equal divisions of the 528px */
+    grid-template-rows: 1fr 1fr 1fr;
+    /* 3 equal divisions of the 528px */
     gap: 1.5rem;
 }
 
@@ -473,18 +492,18 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 2.5rem 3rem 2rem 3rem; /* 2rem strict bottom padding */
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.95) 0%,
-        rgba(0,0,0,0.3)  50%,
-        transparent      100%
-    );
+    padding: 2.5rem 3rem 2rem 3rem;
+    /* 2rem strict bottom padding */
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.3) 50%,
+            transparent 100%);
     transition: background 0.4s ease;
 }
 
 .nw-card--small .nw-card-overlay {
-    padding: 1.5rem 1.5rem 2rem 1.5rem; /* Matches the 2rem strict bottom padding of the featured card */
+    padding: 1.5rem 1.5rem 2rem 1.5rem;
+    /* Matches the 2rem strict bottom padding of the featured card */
 }
 
 .nw-card-tag {
@@ -512,7 +531,7 @@
 
 .nw-card-date {
     font-size: 0.85rem;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.02em;
 }
 
@@ -531,7 +550,7 @@
     overflow: hidden;
     background: transparent;
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 0.8rem 2.5rem;
     border-radius: 50px;
     font-size: 0.75rem;

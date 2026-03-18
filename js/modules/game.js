@@ -92,7 +92,12 @@ monsterLogo.src   = 'assets/images/logo.png';
 // -- spawn a falling drop --
 function spawnDrop() {
     const color = CAN_COLORS[Math.floor(Math.random() * CAN_COLORS.length)];
-    const size  = canvas.width * 0.07;
+    // optimize size specifically for mobile using ratio checking
+    let sizeFactor = 0.07;
+    if (canvas.width <= 480) sizeFactor = 0.12;
+    else if (canvas.width <= 768) sizeFactor = 0.09;
+    
+    const size  = canvas.width * sizeFactor;
     const x     = Math.random() * (canvas.width - size - 20) + 10;
     cans.push({ x, y: -size, w: size, h: size, color, vy: speed + Math.random() * 1.2 });
 }
