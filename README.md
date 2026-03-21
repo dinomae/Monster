@@ -13,7 +13,7 @@ The site is designed to feel "alive" using GSAP ScrollTrigger to handle the scro
 ### Features:
 
 - **Dynamic Flavour Swapping:** Switch between Original, Blue, Purple, and Red. The whole site's theme (glows, accents, text shadows) shifts instantly to match the can.
-- **Can Catcher Mini-Game:** An arcade game built on HTML5 Canvas. Catch logos, manage lives, and beat your high score.
+- **Monster Catcher Mini-Game:** An arcade game built on HTML5 Canvas. Catch logos, manage lives, and beat your high score.
 - **News & Events:** Custom-built glassmorphic modals with smooth transitions and a "More News" side panel to keep the main page clean.
 - **Magnetic Navigation:** A sticky navbar that tracks your position on the page and enables smooth anchor scrolling.
 - **Responsive Design:** Fully responsive layout that adapts to all screen sizes.
@@ -99,7 +99,7 @@ Each module handles a specific feature:
 
 - **core.js:** Initialization, event delegation, and global utilities
 - **cart.js:** Shopping cart management and interactions
-- **game.js:** Can Catcher game logic and canvas rendering
+- **game.js:** Monster Catcher game logic and canvas rendering
 - **flavours-modal.js:** Dynamic flavour switching and theme updates
 - **news-events.js:** News feed and events panel management
 
