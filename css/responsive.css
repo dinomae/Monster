@@ -337,11 +337,17 @@ body.nav-open .mobile-nav-overlay {
 
     /* ── Game Section ────────────────────────────────────── */
     .game-section {
-        padding: 3rem 0 4rem;
+        padding: 2.5rem 0 3rem;
     }
-
-    .game-container {
-        width: 96vw;
+    .game-hub {
+        height: 380px;
+    }
+    .game-card {
+        width: min(640px, 90vw);
+    }
+    .game-card-preview-label {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
     }
 
     /* ── Confirm Modal ───────────────────────────────────── */
@@ -469,6 +475,32 @@ body.nav-open .mobile-nav-overlay {
     .overlay-sub {
         font-size: 0.78rem;
         padding: 0 1.5rem;
+    }
+
+    /* ── Game hub phone layout ──────────────────────────── */
+    .game-hub {
+        height: 340px;
+        padding: 1rem 0;
+    }
+    .game-card {
+        width: 92vw; /* nearly full width on phones */
+    }
+    .game-section {
+        gap: 1.5rem;
+    }
+    .game-title {
+        font-size: clamp(1.8rem, 7vw, 2.8rem);
+    }
+    /* Larger tap area for overlay buttons on phones */
+    .overlay-btn {
+        padding: 0.85rem 2.2rem;
+        font-size: 0.82rem;
+        min-height: 48px; /* WCAG touch target */
+    }
+    /* life dots bigger for fingers */
+    .life-dot {
+        width: 12px;
+        height: 12px;
     }
 
     /* ── Mobile nav links larger tap target ──────────────── */

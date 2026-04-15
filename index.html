@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080808">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Monster Energy — Unleash the Beast. Play arcade games, explore flavours, and discover events.">
     <title>Monster Energy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -628,48 +632,116 @@
     </div>
 
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- SECTION 4 — MINI GAME                                  -->
+    <!-- SECTION 4 — ARCADE                                     -->
     <!-- ══════════════════════════════════════════════════════ -->
     <section class="game-section" id="game">
         <div class="game-hero">
-            <span class="game-label">MINI GAME</span>
-            <h2 class="game-title">Monster Catch</h2>
-            <p class="game-sub">Catch every drop. Miss one and it's over.</p>
+            <span class="game-label">ARCADE</span>
+            <h2 class="game-title" id="game-section-title">Monster Catch</h2>
+            <p class="game-sub" id="game-section-sub">Catch every drop. Miss one and it's over.</p>
         </div>
 
-        <div class="game-container" id="game-container">
-            <!-- Lives -->
-            <div class="game-hud">
-                <div class="hud-left">
-                    <span class="hud-label">SCORE</span>
-                    <span class="hud-value" id="game-score">0</span>
-                </div>
-                <div class="hud-center" id="hud-lives">
-                    <span class="life-dot active" id="life-1"></span>
-                    <span class="life-dot active" id="life-2"></span>
-                    <span class="life-dot active" id="life-3"></span>
-                </div>
-                <div class="hud-right">
-                    <span class="hud-label">BEST</span>
-                    <span class="hud-value" id="game-best">0</span>
+        <!-- 3-CARD GAME HUB -->
+        <div class="game-hub" id="game-hub">
+
+            <!-- ── CARD 1: Monster Catch ── -->
+            <div class="game-card game-card--active" id="gcard-catch" data-game="catch">
+                <div class="game-card-preview-label">Monster Catch</div>
+                <div class="game-container" id="game-container">
+                    <div class="game-hud">
+                        <div class="hud-left">
+                            <span class="hud-label">SCORE</span>
+                            <span class="hud-value" id="game-score">0</span>
+                        </div>
+                        <div class="hud-center" id="hud-lives">
+                            <span class="life-dot active" id="life-1"></span>
+                            <span class="life-dot active" id="life-2"></span>
+                            <span class="life-dot active" id="life-3"></span>
+                        </div>
+                        <div class="hud-right">
+                            <span class="hud-label">BEST</span>
+                            <span class="hud-value" id="game-best">0</span>
+                        </div>
+                    </div>
+                    <canvas id="game-canvas"></canvas>
+                    <div class="game-overlay" id="game-overlay">
+                        <img src="assets/images/logo.png" alt="Monster" class="game-overlay-logo">
+                        <h3 class="overlay-title" id="overlay-title">READY?</h3>
+                        <p class="overlay-sub" id="overlay-sub">
+                            <span class="instruction-mouse">Move your mouse to catch the falling Monster logos.</span>
+                            <span class="instruction-touch">Tap to catch the falling Monster logos.</span>
+                            <br>Miss 3 and you're done.
+                        </p>
+                        <button class="overlay-btn" id="overlay-btn">UNLEASH</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Canvas -->
-            <canvas id="game-canvas"></canvas>
-
-            <!-- Overlay (start / game over) -->
-            <div class="game-overlay" id="game-overlay">
-                <img src="assets/images/logo.png" alt="Monster" class="game-overlay-logo">
-                <h3 class="overlay-title" id="overlay-title">READY?</h3>
-                <p class="overlay-sub" id="overlay-sub">
-                    <span class="instruction-mouse">Move your mouse to catch the falling Monster logos.</span>
-                    <span class="instruction-touch">Tap to catch the falling Monster logos.</span>
-                    <br>Miss 3 and you're done.
-                </p>
-                <button class="overlay-btn" id="overlay-btn">UNLEASH</button>
+            <!-- ── CARD 2: Snake Frenzy ── -->
+            <div class="game-card game-card--preview" id="gcard-snake" data-game="snake">
+                <div class="game-card-preview-label">Snake Frenzy</div>
+                <div class="game-container" id="snake-container">
+                    <div class="game-hud">
+                        <div class="hud-left">
+                            <span class="hud-label">SCORE</span>
+                            <span class="hud-value" id="snake-score">0</span>
+                        </div>
+                        <div class="hud-center">
+                            <span class="hud-label" style="letter-spacing:2px;font-size:0.6rem;color:rgba(255,255,255,0.35)">SNAKE FRENZY</span>
+                        </div>
+                        <div class="hud-right">
+                            <span class="hud-label">BEST</span>
+                            <span class="hud-value" id="snake-best">0</span>
+                        </div>
+                    </div>
+                    <canvas id="snake-canvas"></canvas>
+                    <div class="game-overlay" id="snake-overlay">
+                        <img src="assets/images/logo.png" alt="Monster" class="game-overlay-logo">
+                        <h3 class="overlay-title" id="snake-overlay-title">HUNT MODE</h3>
+                        <p class="overlay-sub" id="snake-overlay-sub">
+                            <span class="instruction-mouse">Arrow keys / WASD to slither.</span>
+                            <span class="instruction-touch">Swipe to slither.</span>
+                            <br>Eat Monster logos to grow. Avoid walls &amp; yourself.
+                        </p>
+                        <button class="overlay-btn" id="snake-overlay-btn">SLITHER</button>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <!-- ── CARD 3: Reflex Rush ── -->
+            <div class="game-card game-card--preview" id="gcard-reflex" data-game="reflex">
+                <div class="game-card-preview-label">Reflex Rush</div>
+                <div class="game-container" id="reflex-container">
+                    <div class="game-hud">
+                        <div class="hud-left">
+                            <span class="hud-label">SCORE</span>
+                            <span class="hud-value" id="reflex-score">0</span>
+                        </div>
+                        <div class="hud-center" id="reflex-hud-lives">
+                            <span class="life-dot active" id="reflex-life-1"></span>
+                            <span class="life-dot active" id="reflex-life-2"></span>
+                            <span class="life-dot active" id="reflex-life-3"></span>
+                        </div>
+                        <div class="hud-right">
+                            <span class="hud-label">BEST</span>
+                            <span class="hud-value" id="reflex-best">0</span>
+                        </div>
+                    </div>
+                    <canvas id="reflex-canvas"></canvas>
+                    <div class="game-overlay" id="reflex-overlay">
+                        <img src="assets/images/logo.png" alt="Monster" class="game-overlay-logo">
+                        <h3 class="overlay-title" id="reflex-overlay-title">BEAST MODE?</h3>
+                        <p class="overlay-sub" id="reflex-overlay-sub">
+                            <span class="instruction-mouse">Click the Monster cans before they vanish.</span>
+                            <span class="instruction-touch">Tap the Monster cans before they vanish.</span>
+                            <br>5 consecutive hits = BEAST MODE!
+                        </p>
+                        <button class="overlay-btn" id="reflex-overlay-btn">SMASH IT</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /game-hub -->
     </section>
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -798,6 +870,9 @@
     <script src="js/modules/news-events.js" defer></script>
     <script src="js/modules/flavours-modal.js" defer></script>
     <script src="js/modules/game.js" defer></script>
+    <script src="js/modules/snake.js" defer></script>
+    <script src="js/modules/reflex.js" defer></script>
+    <script src="js/modules/game-hub.js" defer></script>
 </body>
 
 </html>

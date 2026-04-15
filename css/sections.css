@@ -59,16 +59,129 @@
     letter-spacing: 0.5px;
 }
 
+/* ── Game Hub: 3D Coverflow ── */
+.game-hub {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 600px;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    overflow: visible;
+    padding: 2rem 0;
+    touch-action: pan-y; /* allow vertical scroll, JS handles horizontal swipe */
+}
+
+@media (max-width: 900px) {
+    .game-hub { height: 480px; }
+}
+@media (max-width: 600px) {
+    .game-hub { height: 420px; }
+}
+@media (max-width: 400px) {
+    .game-hub { height: 380px; }
+}
+
+/* ── Individual game card ── */
+.game-card {
+    position: absolute;
+    width: min(860px, 88vw);
+    border-radius: 28px;
+    overflow: visible;
+    cursor: default;
+    background: transparent;
+    /* GSAP handles transform, z-index, opacity */
+}
+
+/* Inner container */
 .game-container {
     position: relative;
-    width: min(1000px, 92vw);
+    width: 100%;
     border-radius: 24px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-    background: rgba(8, 8, 8, 0.8);
+    background: rgba(8, 8, 8, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+
+/* Canvas should just be block-level, size set by JS */
+.game-container canvas {
+    display: block;
+    width: 100%;
+}
+
+/* ── Pointer events ── */
+/* JS handles switching via bounding-rect hit testing (useCapture),
+   so we only need CSS to manage in-game interactivity. */
+
+/* Active card: everything interactive as normal */
+.game-card--active {
+    pointer-events: auto;
+}
+.game-card--active .game-card-preview-label {
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Preview cards: show label, block game interaction, cursor:pointer */
+.game-card--preview {
+    pointer-events: auto;
+    cursor: pointer;
+}
+.game-card--preview .game-container {
+    pointer-events: none;
+}
+
+/* ── Preview label overlay ── */
+.game-card-preview-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    border-radius: 24px;
+    opacity: 0;
+    pointer-events: none; /* default: invisible labels don't block anything */
+    transition: opacity 0.35s ease, border-color 0.35s ease;
+    z-index: 30;
+    border: 1.5px solid rgba(127, 193, 43, 0);
+}
+
+.game-card-preview-label::before {
+    content: '▶ PLAY';
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+    display: block;
+}
+
+/* On preview cards: show label & make it clickable */
+.game-card--preview .game-card-preview-label {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.game-card--preview:hover .game-card-preview-label {
+    border-color: var(--accent);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.game-card--preview:hover .game-container {
+    box-shadow: 0 0 0 1.5px var(--accent), 0 20px 60px rgba(0,0,0,0.5);
 }
 
 /* HUD */
@@ -76,7 +189,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -92,7 +205,7 @@
 }
 
 .hud-label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 3px;
     color: rgba(255, 255, 255, 0.35);
@@ -100,7 +213,7 @@
 }
 
 .hud-value {
-    font-size: 1.6rem;
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
     font-weight: 700;
     color: var(--accent);
     font-variant-numeric: tabular-nums;
@@ -128,11 +241,14 @@
     box-shadow: 0 0 10px var(--accent);
 }
 
-/* canvas */
+/* canvas — cursor:none on mouse devices, auto on touch */
 #game-canvas {
     display: block;
     width: 100%;
     cursor: none;
+}
+@media (pointer: coarse) {
+    .game-container canvas { cursor: auto; }
 }
 
 /* game overlay */
@@ -170,7 +286,7 @@
 }
 
 .overlay-title {
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 4vw, 2rem);
     font-weight: 700;
     letter-spacing: 2px;
     color: #fff;
@@ -178,11 +294,20 @@
 }
 
 .overlay-sub {
-    font-size: 0.88rem;
+    font-size: clamp(0.75rem, 2vw, 0.88rem);
     color: rgba(255, 255, 255, 0.5);
     text-align: center;
     line-height: 1.7;
     letter-spacing: 0.3px;
+    padding: 0 1rem;
+}
+
+/* Show/hide instruction text based on input device */
+.instruction-mouse { display: inline; }
+.instruction-touch  { display: none; }
+@media (pointer: coarse) {
+    .instruction-mouse { display: none; }
+    .instruction-touch  { display: inline; }
 }
 
 .overlay-btn {
