@@ -83,21 +83,14 @@ if (cartDrawerBackdrop) {
     cartDrawerBackdrop.addEventListener('click', (e) => { if (e.target === cartDrawerBackdrop) closeCart(); });
 }
 
-// -- checkout --
+// -- checkout → open payment gateway --
 if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
         if (cart.length === 0) { showToast('Your cart is empty! Add some Monster first. 🥤'); return; }
-        const total = cart.reduce((sum, i) => sum + i.price, 0).toFixed(2);
-        cart = [];
-        updateCartUI();
         closeCart();
         setTimeout(() => {
-            showConfirm(
-                '🛒',
-                'Order Placed!',
-                `Your Monster Energy order (₹${total}) has been confirmed. Prepare to unleash the beast! 🔥`
-            );
-        }, 400);
+            if (typeof openPaymentGateway === 'function') openPaymentGateway(cart);
+        }, 350);
     });
 }
 

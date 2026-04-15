@@ -3,6 +3,7 @@
 @import url('components.css');
 @import url('sections/flavours.css');
 @import url('sections/footer.css');
+@import url('payment.css');
 @import url('responsive.css');
 
 * {
