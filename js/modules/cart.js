@@ -23,10 +23,11 @@ function updateCartBadge() {
 
 function updateCartUI() {
     cartItemsContainer.innerHTML = '';
+    const fmt = window.formatPrice || (v => '₹' + v.toFixed(2));
 
     if (cart.length === 0) {
         cartItemsContainer.appendChild(cartEmptyMsg);
-        cartSubtotalEl.textContent = '₹0.00';
+        cartSubtotalEl.textContent = fmt(0);
         updateCartBadge();
         return;
     }
@@ -44,14 +45,14 @@ function updateCartUI() {
             <img src="assets/images/${imgBase}.png" alt="${item.name}" class="cart-item-img">
             <div class="cart-item-info">
                 <span class="cart-item-name">${item.name}</span>
-                <span class="cart-item-price">₹${item.price.toFixed(2)}</span>
+                <span class="cart-item-price">${fmt(item.price)}</span>
                 <span class="cart-item-remove" data-index="${index}">Remove</span>
             </div>
         `;
         cartItemsContainer.appendChild(itemEl);
     });
 
-    cartSubtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
+    cartSubtotalEl.textContent = fmt(subtotal);
     updateCartBadge();
 
     // rebind remove buttons after re-render

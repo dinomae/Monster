@@ -500,6 +500,7 @@
 
 /* ── Success screen ── */
 .pg-success {
+    display: flex;
     min-height: 260px;
     flex-direction: column;
     align-items: center;
@@ -553,10 +554,23 @@
 
 /* ── Mobile ── */
 @media (max-width: 480px) {
-    .pg-modal { border-radius: 20px 20px 0 0; max-height: 94vh; }
+    .pg-modal {
+        border-radius: 20px 20px 0 0;
+        max-height: 94svh; /* svh = small viewport height, clips address bar space */
+        width: 100vw;
+    }
     .pg-backdrop { align-items: flex-end; }
     .pg-card-preview { height: 130px; }
     .pg-card-number-disp { font-size: 0.9rem; letter-spacing: 2px; }
     .pg-field-row { grid-template-columns: 1fr; }
     .pg-btn { font-size: 0.75rem; letter-spacing: 1px; }
+}
+
+/* extra small phones */
+@media (max-width: 360px) {
+    .pg-header { padding: 1rem 1.2rem; }
+    .pg-panel { padding: 1.2rem; gap: 1rem; }
+    .pg-card-preview { height: 110px; }
+    .pg-card-number-disp { font-size: 0.8rem; letter-spacing: 1px; }
+    .pg-card-chip { width: 28px; height: 22px; }
 }

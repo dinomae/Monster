@@ -430,7 +430,14 @@ window.addEventListener('keydown', (e) => {
         if (nwPanelBackdrop.classList.contains('open'))   closeNewsPanel();
         if (cartDrawerBackdrop && cartDrawerBackdrop.classList.contains('open')) closeCart();
         if (confirmBackdrop    && confirmBackdrop.classList.contains('open'))    closeConfirm();
-        if (flKmBackdrop       && flKmBackdrop.classList.contains('open'))       closeFlavourModal();
+        // flKmBackdrop / closeFlavourModal are exposed from flavours-modal.js via window
+        if (window.flKmBackdrop && window.flKmBackdrop.classList.contains('open')) {
+            if (typeof window.closeFlavourModal === 'function') window.closeFlavourModal();
+        }
+        // leaderboard & quiz
+        const lbBack = document.getElementById('lb-backdrop');
+        if (lbBack && lbBack.classList.contains('open')) lbBack.classList.remove('open'), (document.body.style.overflow = '');
+        if (window.quizBackdrop && window.quizBackdrop.classList.contains('open')) window.quizBackdrop.classList.remove('open'), (document.body.style.overflow = '');
     }
 });
 
@@ -509,3 +516,20 @@ Object.values(navLinks).forEach(link => {
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && document.body.classList.contains('nav-open')) closeMobileNav();
 });
+
+// -- newsletter form feedback --
+const newsletterForm = document.querySelector('.footer-newsletter-form');
+const newsletterInput = document.querySelector('.footer-newsletter-input');
+if (newsletterForm && newsletterInput) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = newsletterInput.value.trim();
+        if (!email || !email.includes('@')) {
+            showToast('⚠️ Enter a valid email address.');
+            newsletterInput.focus();
+            return;
+        }
+        showToast('🔥 You\'re in the Beast Zone! Check your inbox.');
+        newsletterInput.value = '';
+    });
+}

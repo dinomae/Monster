@@ -198,8 +198,7 @@ body.nav-open .mobile-nav-overlay {
     }
 
     .scroll-hint {
-        bottom: 7.8rem;
-        /* above switch-menu (bottom 3.5rem + height ~54px) */
+        bottom: 9.2rem; /* above flavour-name (7.5rem) with clear gap */
         font-size: 0.65rem;
     }
 
@@ -261,6 +260,9 @@ body.nav-open .mobile-nav-overlay {
     /* ── Events Section ──────────────────────────────────── */
     .ev-layout {
         padding: 1rem 1.5rem 2.5rem;
+    }
+    .ev-layout::-webkit-scrollbar-track {
+        margin-inline: 1.5rem; /* match reduced padding */
     }
 
     .ev-heading {
@@ -390,14 +392,13 @@ body.nav-open .mobile-nav-overlay {
     }
 
     .flavour-name {
-        bottom: 7rem;
+        bottom: 7.2rem; /* above switch-menu */
         font-size: 0.7rem;
         letter-spacing: 2px;
     }
 
     .scroll-hint {
-        bottom: 8.5rem;
-        /* above switch-menu (bottom 3rem + height ~50px) */
+        bottom: 9rem; /* above flavour-name — clear stack */
         font-size: 0.62rem;
     }
 
@@ -419,7 +420,7 @@ body.nav-open .mobile-nav-overlay {
 
     .ev-card {
         width: min(340px, 88vw);
-        height: 440px;
+        height: 380px; /* reduced from 440px — safer on short phones */
     }
 
     /* ── News ────────────────────────────────────────────── */
@@ -465,6 +466,7 @@ body.nav-open .mobile-nav-overlay {
 
     .fl-stats {
         gap: 1rem;
+        flex-wrap: wrap; /* prevent overflow on tiny screens */
     }
 
     .stat-val {
@@ -506,5 +508,127 @@ body.nav-open .mobile-nav-overlay {
     /* ── Mobile nav links larger tap target ──────────────── */
     .mobile-nav-overlay a {
         font-size: 1.7rem;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VERY SMALL PHONES  ≤ 360px
+   (Galaxy A series, older Androids, iPhone SE 1st gen)
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 360px) {
+
+    /* ── Navbar — prevent MONSTER ENERGY wrapping ────────── */
+    .navbar {
+        margin: 0.4rem 0.5rem 0;
+        padding: 0 0.75rem;
+    }
+
+    .nav-brand {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-cta {
+        font-size: 0.68rem;
+        padding: 0.35rem 0.7rem;
+    }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    #monster-can {
+        height: 40vh;
+        min-height: 220px;
+    }
+
+    .switch-menu {
+        gap: 0.6rem;
+        padding: 0 0.75rem;
+        height: 46px;
+        bottom: 2.5rem;
+    }
+
+    .color-btn {
+        width: 18px;
+        height: 18px;
+    }
+
+    .flavour-name {
+        font-size: 0.65rem;
+        letter-spacing: 1.5px;
+        bottom: 6.5rem;
+    }
+
+    .scroll-hint {
+        bottom: 8.5rem;
+        font-size: 0.6rem;
+    }
+
+    /* ── Events ──────────────────────────────────────────── */
+    .ev-card {
+        width: 92vw;
+        height: 340px;
+    }
+
+    .ev-heading {
+        padding: 0 1rem;
+    }
+
+    .ev-title {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+    }
+
+    /* ── Flavours ────────────────────────────────────────── */
+    .fl-detail-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .fl-stats {
+        gap: 0.75rem;
+    }
+
+    .stat-val {
+        font-size: 1.4rem;
+    }
+
+    /* ── News ────────────────────────────────────────────── */
+    .nw-layout {
+        padding: 0 1rem;
+    }
+
+    .nw-card--featured {
+        height: 200px;
+    }
+
+    .nw-card--small {
+        height: 140px;
+    }
+
+    /* ── Cart ────────────────────────────────────────────── */
+    .cart-header {
+        padding: 1.5rem 1rem 1rem;
+    }
+
+    .cart-items {
+        padding: 1.2rem 1rem;
+    }
+
+    .cart-footer {
+        padding: 1.2rem 1rem;
+    }
+
+    /* ── Game ────────────────────────────────────────────── */
+    .game-hub {
+        height: 300px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .footer-drink-notice {
+        font-size: 0.58rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* ── Mobile nav ──────────────────────────────────────── */
+    .mobile-nav-overlay a {
+        font-size: 1.5rem;
+        letter-spacing: 3px;
     }
 }

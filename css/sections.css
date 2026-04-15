@@ -462,7 +462,7 @@
 .ev-layout::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.04);
     border-radius: 10px;
-    margin-left: 4rem;
+    margin-inline: 4rem; /* match ev-layout padding */
 }
 
 .ev-layout::-webkit-scrollbar-thumb {

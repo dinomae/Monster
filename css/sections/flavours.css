@@ -135,7 +135,7 @@ body::after {
 }
 
 .fl-hero-sub {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 7px;
     color: rgba(255, 255, 255, 0.35);
@@ -156,7 +156,6 @@ body::after {
     padding: 5rem 7rem;
     position: relative;
     overflow: hidden;
-    cursor: none;
 }
 
 .fl-row--reverse {

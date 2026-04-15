@@ -268,6 +268,10 @@ window.SnakeFrenzy = (() => {
         gameRunning = false;
         cancelAnimationFrame(frameId);
         canvas.style.touchAction = 'pan-y';
+        // submit to leaderboard
+        if (typeof window.submitLeaderboardScore === 'function') {
+            window.submitLeaderboardScore('snake', score);
+        }
         overlay.style.display  = 'flex';
         overlay.style.opacity  = '0';
         overlayTitle.textContent = 'BEAST DOWN!';

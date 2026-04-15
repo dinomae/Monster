@@ -4,6 +4,7 @@
 @import url('sections/flavours.css');
 @import url('sections/footer.css');
 @import url('payment.css');
+@import url('features.css');
 @import url('responsive.css');
 
 * {

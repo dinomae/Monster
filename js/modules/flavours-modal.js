@@ -1,6 +1,8 @@
 // -- flavour "know more" modal --
-const flKmBackdrop    = document.getElementById('fl-km-backdrop');
-const flKmClose       = document.getElementById('fl-km-close');
+// expose to window so core.js escape handler can reach them
+window.flKmBackdrop    = document.getElementById('fl-km-backdrop');
+const flKmClose        = document.getElementById('fl-km-close');
+const flKmBackdrop     = window.flKmBackdrop;
 
 // elements to populate
 const flKmglow        = document.getElementById('fl-km-glow');
@@ -41,9 +43,11 @@ function openFlavourModal(card) {
 }
 
 function closeFlavourModal() {
-    flKmBackdrop.classList.remove('open');
+    if (flKmBackdrop) flKmBackdrop.classList.remove('open');
     document.body.style.overflow = '';
 }
+// expose to window for cross-module escape key handler
+window.closeFlavourModal = closeFlavourModal;
 
 // bind "know more ↗" buttons
 document.querySelectorAll('.fl-know-more-btn').forEach(btn => {

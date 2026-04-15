@@ -14,6 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="assets/images/logo.png">
 </head>
 
 <body>
@@ -56,8 +60,24 @@
             <li><a href="#news" id="nav-news">News</a></li>
             <li><a href="#game" id="nav-game">Game</a></li>
         </ul>
-        <div class="nav-cta" id="nav-cta-cart">Cart <span class="cart-badge" id="cart-badge"
-                style="display:none">0</span></div>
+        <div class="nav-right">
+            <div class="nav-cta" id="nav-cta-cart">Cart <span class="cart-badge" id="cart-badge"
+                    style="display:none">0</span></div>
+            <!-- Currency selector -->
+            <div class="currency-selector" id="currency-selector">
+                <button class="currency-btn" id="currency-btn" aria-haspopup="listbox" aria-expanded="false"
+                    aria-label="Select currency">
+                    <span class="currency-symbol" id="currency-symbol">₹</span>
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <ul class="currency-dropdown" id="currency-dropdown" role="listbox" aria-label="Currency">
+                    <li class="currency-option active" data-code="INR" data-symbol="₹" data-rate="1" role="option">₹ INR</li>
+                    <li class="currency-option" data-code="USD" data-symbol="$" data-rate="0.012" role="option">$ USD</li>
+                    <li class="currency-option" data-code="EUR" data-symbol="€" data-rate="0.011" role="option">€ EUR</li>
+                    <li class="currency-option" data-code="GBP" data-symbol="£" data-rate="0.0095" role="option">£ GBP</li>
+                </ul>
+            </div>
+        </div>
         <!-- Hamburger — only visible on mobile -->
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
             <span></span><span></span><span></span>
@@ -136,6 +156,7 @@
         <div class="fl-hero">
             <h2 class="fl-hero-title">Choose Your <span class="fl-hero-accent" id="fl-title-accent">Beast</span></h2>
             <p class="fl-hero-sub">Four flavours. One obsession.</p>
+            <button class="fl-quiz-btn" id="fl-quiz-btn" aria-haspopup="dialog">⚡ FIND YOUR BEAST</button>
         </div>
 
         <div class="fl-wrapper">
@@ -977,9 +998,9 @@
             <div class="footer-col footer-newsletter-col">
                 <h4 class="footer-col-heading">Stay in the Beast Zone</h4>
                 <p class="footer-newsletter-sub">Get exclusive drops, event alerts & behind-the-scenes access.</p>
-                <form class="footer-newsletter-form" onsubmit="return false;">
+                <form class="footer-newsletter-form">
                     <input type="email" class="footer-newsletter-input" placeholder="Your email address"
-                        aria-label="Email address">
+                        aria-label="Email address" autocomplete="email">
                     <button type="submit" class="footer-newsletter-btn">SUBSCRIBE</button>
                 </form>
                 <p class="footer-newsletter-note">No spam. Ever. Unsubscribe anytime.</p>
@@ -1001,6 +1022,153 @@
 
     </footer>
 
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- LEADERBOARD PANEL                                      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="lb-backdrop" id="lb-backdrop" role="dialog" aria-modal="true" aria-label="Leaderboard">
+        <div class="lb-panel" id="lb-panel">
+            <div class="lb-header">
+                <div class="lb-header-left">
+                    <span class="lb-label">BEAST RECORDS</span>
+                    <h2 class="lb-title">Leader<span class="lb-title-accent">board</span></h2>
+                </div>
+                <button class="lb-close" id="lb-close" aria-label="Close leaderboard">✕</button>
+            </div>
+
+            <div class="lb-body">
+                <!-- Catch -->
+                <div class="lb-game-block" id="lb-catch-block">
+                    <div class="lb-game-header">
+                        <span class="lb-game-icon">🎯</span>
+                        <span class="lb-game-name">Monster Catch</span>
+                    </div>
+                    <div class="lb-scores" id="lb-catch-scores">
+                        <div class="lb-empty">No scores yet — play to claim the throne!</div>
+                    </div>
+                </div>
+
+                <!-- Snake -->
+                <div class="lb-game-block" id="lb-snake-block">
+                    <div class="lb-game-header">
+                        <span class="lb-game-icon">🐍</span>
+                        <span class="lb-game-name">Snake Frenzy</span>
+                    </div>
+                    <div class="lb-scores" id="lb-snake-scores">
+                        <div class="lb-empty">No scores yet — play to claim the throne!</div>
+                    </div>
+                </div>
+
+                <!-- Reflex -->
+                <div class="lb-game-block" id="lb-reflex-block">
+                    <div class="lb-game-header">
+                        <span class="lb-game-icon">⚡</span>
+                        <span class="lb-game-name">Reflex Rush</span>
+                    </div>
+                    <div class="lb-scores" id="lb-reflex-scores">
+                        <div class="lb-empty">No scores yet — play to claim the throne!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lb-footer">
+                <button class="lb-reset-btn" id="lb-reset">CLEAR SCORES</button>
+                <span class="lb-note">Scores stored locally on this device</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FLAVOUR QUIZ MODAL                                     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="quiz-backdrop" id="quiz-backdrop" role="dialog" aria-modal="true" aria-label="Find your Beast">
+        <div class="quiz-modal" id="quiz-modal">
+            <button class="quiz-close" id="quiz-close" aria-label="Close quiz">✕</button>
+
+            <!-- Progress bar -->
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
+
+            <!-- Step counter -->
+            <div class="quiz-step-label" id="quiz-step-label">QUESTION 1 OF 5</div>
+
+            <!-- Questions wrapper -->
+            <div class="quiz-questions" id="quiz-questions">
+
+                <!-- Q1 -->
+                <div class="quiz-q active" data-q="0">
+                    <p class="quiz-question">What's your vibe right now?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-val="green">🔥 In the zone, crushing it</button>
+                        <button class="quiz-opt" data-val="cyan">❄️ Chill but focused</button>
+                        <button class="quiz-opt" data-val="purple">🌙 Dark mode. Do not disturb.</button>
+                        <button class="quiz-opt" data-val="red">🌪️ Full chaos mode</button>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="quiz-q" data-q="1">
+                    <p class="quiz-question">Pick your ideal weekend:</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-val="green">🏎️ Race track or extreme sports</button>
+                        <button class="quiz-opt" data-val="cyan">🎮 Gaming marathon, no breaks</button>
+                        <button class="quiz-opt" data-val="purple">🎵 Late-night music festival</button>
+                        <button class="quiz-opt" data-val="red">🤼 MMA training / combat sport</button>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="quiz-q" data-q="2">
+                    <p class="quiz-question">Which word describes you best?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-val="green">⚡ Unstoppable</button>
+                        <button class="quiz-opt" data-val="cyan">🧊 Calculated</button>
+                        <button class="quiz-opt" data-val="purple">🔮 Mysterious</button>
+                        <button class="quiz-opt" data-val="red">💥 Explosive</button>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="quiz-q" data-q="3">
+                    <p class="quiz-question">Your energy drink preference:</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-val="green">Classic + bold — the original recipe</button>
+                        <button class="quiz-opt" data-val="cyan">Zero sugar — clean energy only</button>
+                        <button class="quiz-opt" data-val="purple">Something different — surprise me</button>
+                        <button class="quiz-opt" data-val="red">Strongest possible — max power</button>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="quiz-q" data-q="4">
+                    <p class="quiz-question">You're up at 3 AM because:</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-val="green">🏆 Training for a competition</button>
+                        <button class="quiz-opt" data-val="cyan">💻 Coding / working on a project</button>
+                        <button class="quiz-opt" data-val="purple">🎧 Deep in a playlist, no idea how</button>
+                        <button class="quiz-opt" data-val="red">👊 Watching fight replays</button>
+                    </div>
+                </div>
+
+                <!-- Result screen -->
+                <div class="quiz-q quiz-result" data-q="result">
+                    <div class="quiz-result-can-wrap">
+                        <img src="" alt="" class="quiz-result-can" id="quiz-result-can">
+                        <div class="quiz-result-glow" id="quiz-result-glow"></div>
+                    </div>
+                    <div class="quiz-result-body">
+                        <span class="quiz-result-label">YOUR BEAST IS</span>
+                        <h2 class="quiz-result-name" id="quiz-result-name">Original Green</h2>
+                        <p class="quiz-result-desc" id="quiz-result-desc"></p>
+                        <div class="quiz-result-actions">
+                            <button class="quiz-add-btn" id="quiz-add-btn">ADD TO CART</button>
+                            <button class="quiz-retry-btn" id="quiz-retry-btn">RETAKE QUIZ</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /quiz-questions -->
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="js/modules/core.js" defer></script>
@@ -1012,6 +1180,17 @@
     <script src="js/modules/snake.js" defer></script>
     <script src="js/modules/reflex.js" defer></script>
     <script src="js/modules/game-hub.js" defer></script>
+    <script src="js/modules/leaderboard.js" defer></script>
+    <script src="js/modules/currency.js" defer></script>
+    <script src="js/modules/quiz.js" defer></script>
+    <!-- Service Worker registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            });
+        }
+    </script>
 </body>
 
 </html>
