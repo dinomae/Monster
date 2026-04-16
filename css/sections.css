@@ -27,6 +27,7 @@
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+    overflow-x: clip; /* prevent 3D carousel from causing horizontal scroll */
 }
 
 .game-hero {
@@ -76,13 +77,80 @@
 }
 
 @media (max-width: 900px) {
-    .game-hub { height: 480px; }
+    .game-hub { height: 500px; }
 }
 @media (max-width: 600px) {
-    .game-hub { height: 420px; }
+    /* Taller on phones so HUD + canvas aren't squished */
+    .game-hub {
+        height: 460px;
+        padding: 1rem 0;
+        overflow-x: clip; /* clip 3D cards that bleed out, preserve perspective */
+    }
 }
 @media (max-width: 400px) {
-    .game-hub { height: 380px; }
+    .game-hub { height: 430px; }
+}
+
+/* ── Mobile swipe nav (arrow btns + dot pager) ── */
+.game-mobile-nav {
+    display: none; /* hidden on desktop — shown via media query below */
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 0.5rem 0 0;
+}
+
+.game-mob-arrow {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+
+.game-mob-arrow:active {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: scale(0.95);
+}
+
+.game-mob-dots {
+    display: flex;
+    gap: 0.55rem;
+    align-items: center;
+}
+
+.game-mob-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    display: block;
+    flex-shrink: 0;
+}
+
+.game-mob-dot--active {
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    width: 20px;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .game-mobile-nav {
+        display: flex;
+    }
 }
 
 /* ── Individual game card ── */
@@ -247,6 +315,7 @@
     width: 100%;
     cursor: none;
 }
+/* On touch devices: restore normal cursor */
 @media (pointer: coarse) {
     .game-container canvas { cursor: auto; }
 }

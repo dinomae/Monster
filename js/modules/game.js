@@ -78,7 +78,7 @@ window.MonsterCatch = (() => {
         paddleX = (e.clientX - rect.left) * (canvas.width / rect.width);
     });
     function handleTouch(e) {
-        e.preventDefault();
+        if (gameRunning) e.preventDefault();
         const rect = canvas.getBoundingClientRect();
         paddleX = (e.touches[0].clientX - rect.left) * (canvas.width / rect.width);
     }

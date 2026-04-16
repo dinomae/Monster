@@ -7,6 +7,7 @@
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+    overflow-x: clip; /* prevent 3D carousel from triggering horizontal scroll */
 }
 
 .game-hero {

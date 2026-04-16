@@ -11,7 +11,7 @@
     <title>Monster Energy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <!-- PWA -->
@@ -901,6 +901,18 @@
             </div>
 
         </div><!-- /game-hub -->
+
+        <!-- Mobile-only: swipe hint + dot nav -->
+        <div class="game-mobile-nav" id="game-mobile-nav">
+            <button class="game-mob-arrow" id="game-mob-prev" aria-label="Previous game">&#8592;</button>
+            <div class="game-mob-dots">
+                <span class="game-mob-dot game-mob-dot--active" data-idx="0"></span>
+                <span class="game-mob-dot" data-idx="1"></span>
+                <span class="game-mob-dot" data-idx="2"></span>
+            </div>
+            <button class="game-mob-arrow" id="game-mob-next" aria-label="Next game">&#8594;</button>
+        </div>
+
     </section>
 
     <!-- ══════════════════════════════════════════════════════ -->

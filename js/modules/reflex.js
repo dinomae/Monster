@@ -142,10 +142,13 @@ window.ReflexRush = (() => {
 
     canvas.addEventListener('mousedown',  pointerDown);
     canvas.addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (gameRunning) e.preventDefault();
         // Build a synthetic event-like object with clientX/Y from the touch point
         const touch = e.touches[0];
         pointerDown({ clientX: touch.clientX, clientY: touch.clientY, preventDefault: () => {} });
+    }, { passive: false });
+    canvas.addEventListener('touchmove', (e) => {
+        if (gameRunning) e.preventDefault();
     }, { passive: false });
 
     // ── draw ──

@@ -492,6 +492,14 @@ if (hamburger) {
 // close overlay when any mobile link is tapped
 mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileNav));
 
+// tap the dark backdrop area (outside the links) to close
+if (mobileNavOverlay) {
+    mobileNavOverlay.addEventListener('click', (e) => {
+        // only close if click is directly on the overlay, not on a link
+        if (e.target === mobileNavOverlay) closeMobileNav();
+    });
+}
+
 // -- sync mobile nav active highlight with desktop scroll-spy via MutationObserver --
 const mobileNavMap = {
     home:     document.getElementById('mnav-home'),

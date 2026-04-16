@@ -150,7 +150,13 @@ window.SnakeFrenzy = (() => {
     let touchStart = null;
     canvas.addEventListener('touchstart', e => {
         touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    }, { passive: true });
+        // prevent page scroll during gameplay
+        if (gameRunning) e.preventDefault();
+    }, { passive: false });
+    canvas.addEventListener('touchmove', e => {
+        // prevent page scroll while snake is running
+        if (gameRunning) e.preventDefault();
+    }, { passive: false });
     canvas.addEventListener('touchend', e => {
         if (!touchStart || !gameRunning) return;
         const dx = e.changedTouches[0].clientX - touchStart.x;

@@ -337,13 +337,11 @@ body.nav-open .mobile-nav-overlay {
         border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* ── Game Section ────────────────────────────────────── */
+    /* ── Game Section ──────────────────────────────────── */
     .game-section {
-        padding: 2.5rem 0 3rem;
+        padding: 2.5rem 0 2rem;
     }
-    .game-hub {
-        height: 380px;
-    }
+    /* game-hub height managed in sections.css breakpoints above */
     .game-card {
         width: min(640px, 90vw);
     }
@@ -479,16 +477,13 @@ body.nav-open .mobile-nav-overlay {
         padding: 0 1.5rem;
     }
 
-    /* ── Game hub phone layout ──────────────────────────── */
-    .game-hub {
-        height: 340px;
-        padding: 1rem 0;
-    }
+    /* ── Game hub phone layout ─────────────────────────── */
+    /* hub height is now set in sections.css @media blocks */
     .game-card {
         width: 92vw; /* nearly full width on phones */
     }
     .game-section {
-        gap: 1.5rem;
+        gap: 1rem;
     }
     .game-title {
         font-size: clamp(1.8rem, 7vw, 2.8rem);
@@ -497,7 +492,7 @@ body.nav-open .mobile-nav-overlay {
     .overlay-btn {
         padding: 0.85rem 2.2rem;
         font-size: 0.82rem;
-        min-height: 48px; /* WCAG touch target */
+        min-height: 52px; /* WCAG touch target */
     }
     /* life dots bigger for fingers */
     .life-dot {
@@ -615,10 +610,8 @@ body.nav-open .mobile-nav-overlay {
         padding: 1.2rem 1rem;
     }
 
-    /* ── Game ────────────────────────────────────────────── */
-    .game-hub {
-        height: 300px;
-    }
+    /* ── Game ───────────────────────────────────────── */
+    /* hub height managed by sections.css breakpoint blocks */
 
     /* ── Footer ──────────────────────────────────────────── */
     .footer-drink-notice {

@@ -1,5 +1,6 @@
 /* reset */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+button, input, textarea, select { font-family: inherit; }
 
 /* tokens */
 :root {
@@ -15,16 +16,29 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: #fff;
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
     cursor: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     /* safe area insets for notch phones (iPhone X+, punch-hole Androids) */
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+}
+
+/* Premium text selection highlighting */
+::selection {
+    background: var(--accent);
+    color: #000;
+}
+::-moz-selection {
+    background: var(--accent);
+    color: #000;
 }
 
 /* custom cursor */

@@ -25,11 +25,21 @@
     let activeIndex = 0;
     let animating   = false;
 
+    // mobile nav dots
+    const mobDots = document.querySelectorAll('.game-mob-dot');
+    function updateDots() {
+        mobDots.forEach((d, i) => d.classList.toggle('game-mob-dot--active', i === activeIndex));
+    }
     function renderCarousel(animate) {
-        const isMobile = window.innerWidth <= 600;
-        const xOff     = isMobile ? 55 : 70;
-        const scale    = isMobile ? 0.7 : 0.75;
-        const zOff     = isMobile ? -150 : -200;
+        const w = window.innerWidth;
+        let xOff, scale, zOff;
+        if (w <= 380) {
+            xOff = 42; scale = 0.62; zOff = -120; // tiny phones — keep cards visible
+        } else if (w <= 600) {
+            xOff = 50; scale = 0.68; zOff = -140;
+        } else {
+            xOff = 70; scale = 0.75; zOff = -200;
+        }
 
         cards.forEach((card, i) => {
             if (!card) return;
@@ -73,6 +83,7 @@
 
         activeIndex = i;
         renderCarousel(true);
+        updateDots();
 
         const meta = GAME_META[cards[i].dataset.game];
         if (meta) {
@@ -130,10 +141,23 @@
     // ── Swipe gesture (mobile): horizontal swipe on hub switches games ──
     let touchStartX = null;
     let touchStartY = null;
+    let touchStartedInGame = false; // track if touch started inside active game canvas
 
     hub.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
+
+        // Check if touch started inside the active game's container
+        // If so, we must NOT switch games on this swipe
+        touchStartedInGame = false;
+        const activeContainer = cards[activeIndex] && cards[activeIndex].querySelector('.game-container');
+        if (activeContainer) {
+            const r = activeContainer.getBoundingClientRect();
+            if (touchStartX >= r.left && touchStartX <= r.right &&
+                touchStartY >= r.top  && touchStartY <= r.bottom) {
+                touchStartedInGame = true;
+            }
+        }
     }, { passive: true });
 
     hub.addEventListener('touchend', (e) => {
@@ -141,28 +165,47 @@
 
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
+        const startedInGame = touchStartedInGame;
         touchStartX = null;
         touchStartY = null;
+        touchStartedInGame = false;
+
+        // Don't switch games if the swipe originated inside the active game
+        if (startedInGame) return;
 
         // Only trigger if horizontal swipe dominates (not a scroll)
         const SWIPE_MIN = 50;
         if (Math.abs(dx) < SWIPE_MIN || Math.abs(dy) > Math.abs(dx)) return;
 
-        // Make sure the touch was on/near the hub (not a page scroll that passed through)
         if (dx < 0) {
-            switchNext(); // swipe left → go to next game
+            switchNext(); // swipe left → next game
         } else {
-            switchPrev(); // swipe right → go to previous game
+            switchPrev(); // swipe right → prev game
         }
     }, { passive: true });
 
-    // Keyboard navigation (← →) as a bonus
+    // Keyboard navigation (← →) — only when no game is running
     document.addEventListener('keydown', (e) => {
-        if (!animating) {
-            if (e.key === 'ArrowRight') switchNext();
-            if (e.key === 'ArrowLeft')  switchPrev();
-        }
+        if (animating) return;
+        // Don't switch games if the active game is running (player is using arrow keys to play)
+        const activeModuleId = cards[activeIndex] && cards[activeIndex].dataset.game;
+        const activeMod = modules[activeModuleId];
+        // Each game module exposes a `running` getter or we check via stop being available
+        // Since we can't easily check if the game is running from outside,
+        // only switch on Alt+Arrow or if the active card is NOT in-game-overlay mode
+        const overlay = cards[activeIndex] && cards[activeIndex].querySelector('.game-overlay');
+        const overlayVisible = overlay && overlay.style.display !== 'none';
+        // If the overlay is hidden, a game is running — don't steal arrow keys
+        if (!overlayVisible) return;
+        if (e.key === 'ArrowRight') { e.preventDefault(); switchNext(); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); switchPrev(); }
     });
+
+    // Mobile arrow buttons
+    const mobPrev = document.getElementById('game-mob-prev');
+    const mobNext = document.getElementById('game-mob-next');
+    if (mobPrev) mobPrev.addEventListener('click', switchPrev);
+    if (mobNext) mobNext.addEventListener('click', switchNext);
 
     // Entrance animation
     ScrollTrigger.create({
